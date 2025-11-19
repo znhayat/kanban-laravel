@@ -1,0 +1,123 @@
+/* Estructura general */
+body {
+    margin: 0;
+    font-family: 'Verdana', sans-serif;
+    background-color: #f0f4f8;
+    color: #333333;
+}
+
+.layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Menú lateral */
+.sidebar {
+    width: 220px;
+    background-color: #cce4f6;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+}
+.sidebar h2 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    color: #336699;
+}
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+.sidebar li {
+    margin-bottom: 10px;
+}
+.sidebar a {
+    text-decoration: none;
+    color: #336699;
+    font-weight: bold;
+}
+.sidebar a:hover {
+    text-decoration: underline;
+}
+
+/* Contingut principal */
+.main-content {
+    flex: 1;
+    padding: 30px;
+}
+
+/* Títols */
+.title {
+    font-size: 26px;
+    margin-bottom: 20px;
+    color: #336699;
+}
+
+/* Taules */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+table th {
+    background-color: #cce4f6;
+    color: #333;
+}
+
+/* Formularis */
+.form label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+}
+.form input, .form select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Botons */
+.btn {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 15px;
+}
+.btn-green {
+    background-color: #a3d9a5;
+    color: #333;
+}
+.btn-green:hover {
+    background-color: #8ccf8c;
+}
+.btn-blue {
+    background-color: #cce4f6;
+    color: #333;
+}
+.btn-blue:hover {
+    background-color: #b3d8f0;
+}
+.btn-red {
+    background-color: #f6cce4;
+    color: #333;
+}
+.btn-red:hover {
+    background-color: #f0b3d8;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 15px;
+    background: #cce4f6;
+    color: #333;
+    font-size: 14px;
+}
