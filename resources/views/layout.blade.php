@@ -13,7 +13,8 @@
             <h2>Menú</h2>
             <ul>
                 <li><a href="{{ route('usuaris.index') }}">Responsables</a></li>
-                <li><a href="{{ route('prioritats.index') }}">prioritats</a></li>
+                <li><a href="{{ route('prioritats.index') }}">Prioritats</a></li>
+                <li><a href="{{ route('tasques.index') }}">Tascas</a></li>
             </ul>
         </aside>
 
