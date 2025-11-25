@@ -13,7 +13,7 @@
             <h2>Menú</h2>
             <ul>
                 <li><a href="{{ route('usuaris.index') }}">Responsables</a></li>
-                
+                <li><a href="{{ route('prioritats.index') }}">prioritats</a></li>
             </ul>
         </aside>
 

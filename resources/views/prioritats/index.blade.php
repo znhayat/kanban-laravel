@@ -1,9 +1,9 @@
 @extends('layout')
 
 @section('content')
-<h1 class="title">Llista de responsables</h1>
+<h1 class="title">Llista de prioritats</h1>
 
-<a href="{{ route('usuaris.create') }}" class="btn btn-green">Afegir responsable</a>
+<a href="{{ route('prioritats.create') }}" class="btn btn-green">Afegir prioritat</a>
 
 @if(session('success'))
     <div class="alert-success">{{ session('success') }}</div>
@@ -13,18 +13,18 @@
     <thead>
         <tr>
             <th>Nom</th>
-            <th>Email</th>
+            <th>Color</th>
             <th>Accions</th>
         </tr>
     </thead>
     <tbody>
-        @foreach($usuaris as $usuari)
+        @foreach($prioritats as $prioritat)
         <tr>
-            <td>{{ $usuari->nom }}</td>
-            <td>{{ $usuari->email }}</td>
+            <td>{{ $prioritat->nom }}</td>
+            <td>{{ $prioritat->color }}</td>
             <td>
-                <a href="{{ route('usuaris.edit', $usuari) }}" class="btn btn-blue">Editar</a>
-                <form action="{{ route('usuaris.destroy', $usuari) }}" method="POST" style="display:inline;">
+                <a href="{{ route('prioritats.edit', $prioritat) }}" class="btn btn-blue">Editar</a>
+                <form action="{{ route('prioritats.destroy', $prioritat) }}" method="POST" style="display:inline;">
                     @csrf
                     @method('DELETE')
                     <button class="btn btn-red">Eliminar</button>

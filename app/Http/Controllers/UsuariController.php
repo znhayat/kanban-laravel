@@ -30,15 +30,17 @@ class UsuariController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
+            'nom' => 'required|string|max:255',
             'email' => 'required|email|unique:users',
         ]);
 
         User::create([
-        'name' => $request->name,   // o 'nom' segons la teva taula
-        'email' => $request->email,
-        'password' => bcrypt('123456'), // contrasenya per defecte
-    ]);
+            
+            'nom' => $request->nom,   
+            'email' => $request->email,
+            'password' => bcrypt('123456'),
+        ]);
+
         return redirect()->route('usuaris.index');
     }
 
@@ -65,24 +67,25 @@ class UsuariController extends Controller
     public function update(Request $request, string $id)
     {
         $usuari = User::findOrFail($id);
+
         $request->validate([
-        'name' => 'required|string|max:255',
-        'email' => 'required|email|unique:users,email,' . $usuari->id,
-        'password' => 'nullable|string|min:6',
-    ]);
+            'nom' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,' . $usuari->id,
+            'password' => 'nullable|string|min:6',
+        ]);
 
-    $data = [
-        'name' => $request->name,
-        'email' => $request->email,
-    ];
+        $data = [
+            'nom' => $request->nom,   
+            'email' => $request->email,
+        ];
 
-    // Si l’usuari ha escrit una nova contrasenya, la guardem
-    if ($request->filled('password')) {
-        $data['password'] = bcrypt($request->password);
-    }
-    $usuari->update($data);
+        if ($request->filled('password')) {
+            $data['password'] = bcrypt($request->password);
+        }
 
-    return redirect()->route('usuaris.index');
+        $usuari->update($data);
+
+        return redirect()->route('usuaris.index');
     }
 
     /**

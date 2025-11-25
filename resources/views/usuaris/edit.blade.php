@@ -8,7 +8,7 @@
     @method('PUT')
 
     <label>Nom</label>
-    <input type="text" name="name" value="{{ $usuari->name }}" required>
+    <input type="text" name="nom" value="{{ $usuari->name }}" required>
 
     <label>Email</label>
     <input type="email" name="email" value="{{ $usuari->email }}" required>
