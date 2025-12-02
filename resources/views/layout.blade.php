@@ -15,6 +15,7 @@
                 <li><a href="{{ route('usuaris.index') }}">Responsables</a></li>
                 <li><a href="{{ route('prioritats.index') }}">Prioritats</a></li>
                 <li><a href="{{ route('tasques.index') }}">Tascas</a></li>
+                <li><a href="{{ route('estats.index') }}">Estats</a></li>
             </ul>
         </aside>
 
