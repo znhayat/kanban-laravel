@@ -1,9 +1,14 @@
-@extends('layout')
+@extends('layouts.app')
 
 @section('content')
 <h1 class="title">Llista de prioritats</h1>
 
 <a href="{{ route('prioritats.create') }}" class="btn btn-green">Afegir prioritat</a>
+
+{{-- Botó “Afegir” només per admin --}}
+@if(auth()->check() && auth()->user()->role === 'admin')
+    <a href="{{ route('prioritats.create') }}" class="btn btn-green">Afegir prioritat</a>
+@endif
 
 @if(session('success'))
     <div class="alert-success">{{ session('success') }}</div>

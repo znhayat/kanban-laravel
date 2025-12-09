@@ -1,9 +1,12 @@
-@extends('layout')
+@extends('layouts.app')
 
 @section('content')
 <h1 class="title">Llista de tasques</h1>
 
-<a href="{{ route('tasques.create') }}" class="btn btn-green">Afegir tasca</a>
+{{-- Botó “Afegir” només per admin --}}
+@if(auth()->check() && auth()->user()->role === 'admin')
+    <a href="{{ route('tasques.create') }}" class="btn btn-green">Afegir tasca</a>
+@endif
 
 @if(session('success'))
     <div class="alert-success">{{ session('success') }}</div>
@@ -29,12 +32,14 @@
             <td>{{ $tasca->prioritat->nom }} ({{ $tasca->prioritat->color }})</td>
             <td>{{ $tasca->estat->nom }}</td>
             <td>
-                <a href="{{ route('tasques.edit', $tasca) }}" class="btn btn-blue">Editar</a>
-                <form action="{{ route('tasques.destroy', $tasca) }}" method="POST" style="display:inline;">
-                    @csrf
-                    @method('DELETE')
-                    <button class="btn btn-red">Eliminar</button>
-                </form>
+                @if(auth()->check() && auth()->user()->role === 'admin')
+                    <a href="{{ route('tasques.edit', $tasca) }}" class="btn btn-blue">Editar</a>
+                    <form action="{{ route('tasques.destroy', $tasca) }}" method="POST" style="display:inline;">
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn btn-red">Eliminar</button>
+                    </form>
+                @endif
             </td>
         </tr>
         @endforeach

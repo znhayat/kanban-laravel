@@ -1,7 +1,14 @@
 @extends('layouts.app')
 @section('content')
 <h1 class="title">Llista d'estats</h1>
+
 <a href="{{ route('estats.create') }}" class="btn btn-green">Afegir estat</a>
+
+{{-- Botó “Afegir” només per admin --}}
+@if(auth()->check() && auth()->user()->role === 'admin')
+    <a href="{{ route('estats.create') }}" class="btn btn-green">Afegir estat</a>
+@endif
+
 <table>
     <thead>
         <tr>
