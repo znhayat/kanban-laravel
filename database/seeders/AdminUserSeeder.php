@@ -12,7 +12,7 @@ class AdminUserSeeder extends Seeder
     {
         // Crear usuari administrador
         User::create([
-            'nom' => 'Administrador',
+            'name' => 'Administrador',
             'email' => 'admin@kanban.test',
             'password' => Hash::make('admin123'),
             'role' => 'admin',
