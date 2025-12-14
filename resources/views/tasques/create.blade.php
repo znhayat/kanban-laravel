@@ -15,7 +15,7 @@
     <label>Responsable</label>
     <select name="usuari_id" required>
         @foreach($usuaris as $usuari)
-            <option value="{{ $usuari->id }}">{{ $usuari->nom }}</option>
+            <option value="{{ $usuari->id }}">{{ $usuari->name }}</option>
         @endforeach
     </select>
 

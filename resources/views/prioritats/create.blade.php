@@ -9,7 +9,7 @@
     <input type="text" name="nom" required>
 
     <label>Color</label>
-    <input type="text" name="color" required>
+    <input type="color" name="color" value="#888888">
 
     <button class="btn btn-green">Guardar</button>
 </form>

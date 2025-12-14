@@ -1,13 +1,13 @@
 @extends('layouts.app')
+
 @section('content')
-<h1 class="title">Llista d'estats</h1>
+<h1 class="title">Estats</h1>
+
+@if(session('success'))
+    <div class="alert-success">{{ session('success') }}</div>
+@endif
 
 <a href="{{ route('estats.create') }}" class="btn btn-green">Afegir estat</a>
-
-{{-- Botó “Afegir” només per admin --}}
-@if(auth()->check() && auth()->user()->role === 'admin')
-    <a href="{{ route('estats.create') }}" class="btn btn-green">Afegir estat</a>
-@endif
 
 <table>
     <thead>
@@ -23,8 +23,7 @@
             <td>
                 <a href="{{ route('estats.edit', $estat) }}" class="btn btn-blue">Editar</a>
                 <form action="{{ route('estats.destroy', $estat) }}" method="POST" style="display:inline;">
-                    @csrf
-                    @method('DELETE')
+                    @csrf @method('DELETE')
                     <button class="btn btn-red">Eliminar</button>
                 </form>
             </td>

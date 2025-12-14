@@ -1,18 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-<h1 class="title">Llista de prioritats</h1>
-
-<a href="{{ route('prioritats.create') }}" class="btn btn-green">Afegir prioritat</a>
-
-{{-- Botó “Afegir” només per admin --}}
-@if(auth()->check() && auth()->user()->role === 'admin')
-    <a href="{{ route('prioritats.create') }}" class="btn btn-green">Afegir prioritat</a>
-@endif
+<h1 class="title">Prioritats</h1>
 
 @if(session('success'))
     <div class="alert-success">{{ session('success') }}</div>
 @endif
+
+<a href="{{ route('prioritats.create') }}" class="btn btn-green">Afegir prioritat</a>
 
 <table>
     <thead>
@@ -26,12 +21,15 @@
         @foreach($prioritats as $prioritat)
         <tr>
             <td>{{ $prioritat->nom }}</td>
-            <td>{{ $prioritat->color }}</td>
+            <td>
+                <span>
+                    {{ $prioritat->color }}
+                </span>
+            </td>
             <td>
                 <a href="{{ route('prioritats.edit', $prioritat) }}" class="btn btn-blue">Editar</a>
                 <form action="{{ route('prioritats.destroy', $prioritat) }}" method="POST" style="display:inline;">
-                    @csrf
-                    @method('DELETE')
+                    @csrf @method('DELETE')
                     <button class="btn btn-red">Eliminar</button>
                 </form>
             </td>

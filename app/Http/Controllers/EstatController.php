@@ -30,18 +30,15 @@ class EstatController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
+        $data = $request->validate([
             'nom' => 'required|string|max:255',
-            'color' => 'required|string|max:7',
-            'ordre' => 'required|integer',
-            'per_defecte' => 'required|boolean',
-            'descripcio' => 'nullable|string',
         ]);
 
-        Estat::create($validatedData);
+        Estat::create($data);
 
-        return redirect()->route('estats.index')->with('success', 'Estat creat correctament.');
+        return redirect()->route('estats.index')->with('success','Estat creat correctament!');
     }
+
 
     /**
      * Display the specified resource.

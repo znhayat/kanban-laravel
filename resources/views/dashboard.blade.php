@@ -1,17 +1,44 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
+@extends('layouts.app')
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    {{ __("You're logged in!") }}
-                </div>
+@section('content')
+<h1 class="title">Kanban</h1>
+
+
+<div class="kanban">
+    <div class="column">
+        <h2>ToDo</h2>
+        @foreach($todo as $t)
+            <div class="card">
+                <strong>{{ $t->titol }}</strong>
+                <p>{{ $t->descripcio }}</p>
+                <small>Resp: {{ $t->usuari->name }}</small>
+                <small>Prioritat: {{ $t->prioritat->nom }}</small>
             </div>
-        </div>
+        @endforeach
     </div>
-</x-app-layout>
+
+    <div class="column">
+        <h2>Doing</h2>
+        @foreach($doing as $t)
+            <div class="card">
+                <strong>{{ $t->titol }}</strong>
+                <p>{{ $t->descripcio }}</p>
+                <small>Resp: {{ $t->usuari->name }}</small>
+                <small>Prioritat: {{ $t->prioritat->nom }}</small>
+            </div>
+        @endforeach
+    </div>
+
+    <div class="column">
+        <h2>Done</h2>
+        @foreach($done as $t)
+            <div class="card">
+                <strong>{{ $t->titol }}</strong>
+                <p>{{ $t->descripcio }}</p>
+                <small>Resp: {{ $t->usuari->name }}</small>
+                <small>Prioritat: {{ $t->prioritat->nom }}</small>
+            </div>
+        @endforeach
+    </div>
+</div>
+@endsection

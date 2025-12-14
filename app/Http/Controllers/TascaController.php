@@ -10,6 +10,25 @@ use Illuminate\Http\Request;
 
 class TascaController extends Controller
 {
+    public function dashboard()
+    {
+        $todo = \App\Models\Tasca::with(['usuari','prioritat'])
+                    ->whereHas('estat', fn($q) => $q->where('nom','ToDo'))
+                    ->get();
+
+        $doing = \App\Models\Tasca::with(['usuari','prioritat'])
+                    ->whereHas('estat', fn($q) => $q->where('nom','Doing'))
+                    ->get();
+
+        $done = \App\Models\Tasca::with(['usuari','prioritat'])
+                    ->whereHas('estat', fn($q) => $q->where('nom','Done'))
+                    ->get();
+
+        return view('dashboard', compact('todo','doing','done'));
+    }
+
+
+
     /**
      * Display a listing of the resource.
      */

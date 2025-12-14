@@ -4,8 +4,7 @@
 <h1 class="title">Editar tasca</h1>
 
 <form action="{{ route('tasques.update', $tasca) }}" method="POST">
-    @csrf
-    @method('PUT')
+    @csrf @method('PUT')
 
     <label>Títol</label>
     <input type="text" name="titol" value="{{ $tasca->titol }}" required>
@@ -16,8 +15,8 @@
     <label>Responsable</label>
     <select name="usuari_id" required>
         @foreach($usuaris as $usuari)
-            <option value="{{ $usuari->id }}" @if($usuari->id == $tasca->usuari_id) selected @endif>
-                {{ $usuari->nom }}
+            <option value="{{ $usuari->id }}" @selected($usuari->id == $tasca->user_id)>
+                {{ $usuari->name }}
             </option>
         @endforeach
     </select>
@@ -25,7 +24,7 @@
     <label>Prioritat</label>
     <select name="prioritat_id" required>
         @foreach($prioritats as $prioritat)
-            <option value="{{ $prioritat->id }}" @if($prioritat->id == $tasca->prioritat_id) selected @endif>
+            <option value="{{ $prioritat->id }}" @selected($prioritat->id == $tasca->prioritat_id)>
                 {{ $prioritat->nom }} ({{ $prioritat->color }})
             </option>
         @endforeach
@@ -34,7 +33,7 @@
     <label>Estat</label>
     <select name="estat_id" required>
         @foreach($estats as $estat)
-            <option value="{{ $estat->id }}" @if($estat->id == $tasca->estat_id) selected @endif>
+            <option value="{{ $estat->id }}" @selected($estat->id == $tasca->estat_id)>
                 {{ $estat->nom }}
             </option>
         @endforeach

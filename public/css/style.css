@@ -1,123 +1,146 @@
-/* Estructura general */
+/* =========================
+   Paleta de colores
+   ========================= */
+:root {
+  --main-black: #222;       /* negro base para texto y fondo menú */
+  --main-gray: #e0e0e0;     /* gris claro para fondos y bordes */
+  --main-red: #f28b82;      /* rojo pastel para eliminar */
+  --ink: #333;              /* texto gris oscuro */
+  --shadow: rgba(0,0,0,0.1);/* sombra ligera */
+}
+
+/* =========================
+   Estilos generales
+   ========================= */
 body {
-    margin: 0;
-    font-family: 'Verdana', sans-serif;
-    background-color: #f0f4f8;
-    color: #333333;
+  background: var(--main-gray); /* fondo gris claro */
+  color: var(--ink);
+  font-family: "Segoe UI", Arial, sans-serif;
+  margin: 0;
+  line-height: 1.6;
 }
 
-.layout {
-    display: flex;
-    min-height: 100vh;
+/* =========================
+   Menú superior
+   ========================= */
+nav {
+  background-color: var(--main-black); /* menú negro */
+  padding: 12px;
 }
 
-/* Menú lateral */
-.sidebar {
-    width: 220px;
-    background-color: #cce4f6;
-    padding: 20px;
-    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-}
-.sidebar h2 {
-    font-size: 20px;
-    margin-bottom: 15px;
-    color: #336699;
-}
-.sidebar ul {
-    list-style: none;
-    padding: 0;
-}
-.sidebar li {
-    margin-bottom: 10px;
-}
-.sidebar a {
-    text-decoration: none;
-    color: #336699;
-    font-weight: bold;
-}
-.sidebar a:hover {
-    text-decoration: underline;
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+  align-items: center;
 }
 
-/* Contingut principal */
-.main-content {
-    flex: 1;
-    padding: 30px;
+nav ul li a {
+  text-decoration: none;
+  font-weight: bold;
+  color: #fff; /* texto blanco sobre negro */
+  padding: 6px 12px;
+  border-radius: 4px;
+  transition: background 0.2s ease;
 }
 
-/* Títols */
-.title {
-    font-size: 26px;
-    margin-bottom: 20px;
-    color: #336699;
+nav ul li a:hover {
+  background: var(--main-gray); /* hover gris claro */
+  color: var(--main-black);
 }
 
-/* Taules */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    background-color: white;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-}
-table th, table td {
-    border: 1px solid #ddd;
-    padding: 10px;
-}
-table th {
-    background-color: #cce4f6;
-    color: #333;
+/* =========================
+   Layout Kanban
+   ========================= */
+.kanban {
+  display: flex;
+  gap: 20px;
+  margin: 20px;
 }
 
-/* Formularis */
-.form label {
-    display: block;
-    margin-top: 15px;
-    font-weight: bold;
-}
-.form input, .form select {
-    width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+.column {
+  flex: 1;
+  background: #fff; /* fondo blanco para contraste */
+  border: 1px solid var(--main-gray);
+  border-radius: 6px;
+  padding: 12px;
+  box-shadow: 0 4px 10px var(--shadow);
 }
 
-/* Botons */
+.column h2 {
+  margin: 0 0 12px;
+  font-weight: bold;
+  color: var(--main-black); /* títulos en negro */
+  text-align: center;
+}
+
+/* =========================
+   Tarjetas de tareas
+   ========================= */
+.card {
+  background: #fff;
+  border: 1px solid var(--main-gray);
+  border-radius: 6px;
+  padding: 10px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 6px var(--shadow);
+  transition: transform 0.2s ease;
+}
+.card:hover {
+  transform: translateY(-2px);
+}
+
+.card small {
+  display: inline-block;
+  margin-right: 8px;
+  color: #666;
+}
+
+/* =========================
+   Botones
+   ========================= */
 .btn {
-    padding: 10px 16px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-weight: bold;
-    margin-top: 15px;
-}
-.btn-green {
-    background-color: #a3d9a5;
-    color: #333;
-}
-.btn-green:hover {
-    background-color: #8ccf8c;
-}
-.btn-blue {
-    background-color: #cce4f6;
-    color: #333;
-}
-.btn-blue:hover {
-    background-color: #b3d8f0;
-}
-.btn-red {
-    background-color: #f6cce4;
-    color: #333;
-}
-.btn-red:hover {
-    background-color: #f0b3d8;
+  display: inline-block;
+  padding: 8px 14px;
+  border-radius: 4px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
 }
 
-/* Footer */
-.footer {
-    text-align: center;
-    padding: 15px;
-    background: #cce4f6;
-    color: #333;
-    font-size: 14px;
+.btn-gray {
+  background: var(--main-gray);
+  color: var(--main-black);
+}
+
+.btn-black {
+  background: var(--main-black);
+  color: #fff;
+}
+
+.btn-red {
+  background: var(--main-red); /* rojo pastel solo para eliminar */
+  color: #fff;
+}
+
+.btn:hover {
+  opacity: 0.85;
+}
+
+/* =========================
+   Alertas
+   ========================= */
+.alert-success {
+  background: var(--main-gray);
+  border-radius: 4px;
+  padding: 10px;
+  color: var(--main-black);
+}
+.alert-error {
+  background: var(--main-red); /* rojo pastel */
+  border-radius: 4px;
+  padding: 10px;
+  color: #fff;
 }
