@@ -1,8 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<h1 class="title">Kanban</h1>
-
 <div class="kanban">
     <!--Columna ToDo -->
     <div class="column" data-estat-id="{{ \App\Models\Estat::where('nom','ToDo')->first()->id }}">

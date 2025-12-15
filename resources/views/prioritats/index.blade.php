@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<br></br>
+<br>
 
 @if(session('success'))
     <div class="alert-success">{{ session('success') }}</div>
@@ -30,9 +30,8 @@
         <tr>
             <td>{{ $prioritat->nom }}</td>
             <td>
-                <!-- 👇 Cercle de color -->
-                <span style="display:inline-block; width:20px; height:20px; border-radius:50%; background-color: {{ $prioritat->color }}; border:1px solid #ccc;"></span>
-                {{ $prioritat->color }}
+                <!-- Cercle de color (sense hexadecimal) -->
+                <span class="color-circle" style="background-color: {{ $prioritat->color }}"></span>
             </td>
             @auth
                 @if(auth()->user()->role === 'admin')

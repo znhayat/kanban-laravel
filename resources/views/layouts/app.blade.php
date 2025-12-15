@@ -31,9 +31,10 @@
                 </header>
             @endisset
 
-             @auth
+             {{-- @auth
                 <span>Sessió: {{ auth()->user()->name }} ({{ auth()->user()->role }})</span>
-             @endauth
+             @endauth --}}
+
 
             <!-- Page Content -->
             <main>
