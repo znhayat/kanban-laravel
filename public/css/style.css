@@ -72,7 +72,6 @@ h1, .title {
  * Todos los <form> tendrán este estilo
  */
 form {
-    background-color: var(--blanco);   /* Fondo blanco */
     padding: 20px;                     
     border-radius: 10px;               /* Esquinas redondeadas 10px */
     margin-bottom: 20px;               /* 20px de espacio debajo */

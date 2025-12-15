@@ -72,6 +72,10 @@ class TascaController extends Controller
 
         return view('tasques.edit', compact('tasca','usuaris','prioritats','estats'));
     }
+    public function show(string $id)
+    {
+        //
+    }
 
     /**
      * Update the specified resource in storage.
@@ -108,8 +112,6 @@ class TascaController extends Controller
         return response()->json(['success' => true]);
     }
 
-
-
     /**
      * Remove the specified resource from storage.
      */
@@ -120,4 +122,6 @@ class TascaController extends Controller
 
         return redirect()->route('tasques.index')->with('success','Tasca eliminada correctament!');
     }
+
+    
 }
