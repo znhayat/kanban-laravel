@@ -1,13 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
-<h1 class="title">Tasques</h1>
+<br></br>
 
 @if(session('success'))
     <div class="alert-success">{{ session('success') }}</div>
 @endif
 
-<a href="{{ route('tasques.create') }}" class="btn btn-green">Afegir tasca</a>
+@auth
+    @if(auth()->user()->role === 'admin')
+        <a href="{{ route('tasques.create') }}" class="btn btn-green">Afegir tasca</a>
+    @endif
+@endauth
 
 <table>
     <thead>
@@ -17,7 +21,11 @@
             <th>Responsable</th>
             <th>Prioritat</th>
             <th>Estat</th>
-            <th>Accions</th>
+            @auth
+                @if(auth()->user()->role === 'admin')
+                    <th>Accions</th>
+                @endif
+            @endauth
         </tr>
     </thead>
     <tbody>
@@ -28,15 +36,19 @@
             <td>{{ $tasca->usuari->name }}</td>
             <td>{{ $tasca->prioritat->nom }} ({{ $tasca->prioritat->color }})</td>
             <td>{{ $tasca->estat->nom }}</td>
-            <td>
-                <a href="{{ route('tasques.edit', $tasca) }}" class="btn btn-blue">Editar</a>
-                <form action="{{ route('tasques.destroy', $tasca) }}" method="POST" style="display:inline;">
-                    @csrf @method('DELETE')
-                    <button class="btn btn-red" onclick="return confirm('Segur que vols eliminar aquesta tasca?')">
-                        Eliminar
-                    </button>
-                </form>
-            </td>
+            @auth
+                @if(auth()->user()->role === 'admin')
+                    <td>
+                        <a href="{{ route('tasques.edit', $tasca) }}" class="btn btn-blue">Editar</a>
+                        <form action="{{ route('tasques.destroy', $tasca) }}" method="POST" style="display:inline;">
+                            @csrf @method('DELETE')
+                            <button class="btn btn-red" onclick="return confirm('Segur que vols eliminar aquesta tasca?')">
+                                Eliminar
+                            </button>
+                        </form>
+                    </td>
+                @endif
+            @endauth
         </tr>
         @endforeach
     </tbody>
