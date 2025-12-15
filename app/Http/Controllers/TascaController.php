@@ -12,22 +12,14 @@ class TascaController extends Controller
 {
     public function dashboard()
     {
-        $todo = \App\Models\Tasca::with(['usuari','prioritat'])
-                    ->whereHas('estat', fn($q) => $q->where('nom','ToDo'))
-                    ->get();
+        $with = ['usuari','prioritat','estat'];
 
-        $doing = \App\Models\Tasca::with(['usuari','prioritat'])
-                    ->whereHas('estat', fn($q) => $q->where('nom','Doing'))
-                    ->get();
-
-        $done = \App\Models\Tasca::with(['usuari','prioritat'])
-                    ->whereHas('estat', fn($q) => $q->where('nom','Done'))
-                    ->get();
+        $todo = Tasca::with($with)->whereHas('estat', fn($q) => $q->where('nom','ToDo'))->get();
+        $doing = Tasca::with($with)->whereHas('estat', fn($q) => $q->where('nom','Doing'))->get();
+        $done = Tasca::with($with)->whereHas('estat', fn($q) => $q->where('nom','Done'))->get();
 
         return view('dashboard', compact('todo','doing','done'));
     }
-
-
 
     /**
      * Display a listing of the resource.
@@ -100,6 +92,23 @@ class TascaController extends Controller
 
         return redirect()->route('tasques.index')->with('success','Tasca actualitzada correctament!');
     }
+    public function updateEstat(Request $request, $id)
+    {
+        $tasca = Tasca::findOrFail($id);
+
+        // Validem que arriba un estat_id vàlid
+        $request->validate([
+            'estat_id' => 'required|exists:estats,id',
+        ]);
+
+        // Actualitzem la tasca
+        $tasca->estat_id = $request->estat_id;
+        $tasca->save();
+
+        return response()->json(['success' => true]);
+    }
+
+
 
     /**
      * Remove the specified resource from storage.

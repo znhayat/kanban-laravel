@@ -30,13 +30,14 @@ class PrioritatController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nom' => 'required|string|max:255',
-            'color' => 'required|string|max:20',
+        'nom' => ['required', 'regex:/^[A-Za-zÀ-ÿ\s]+$/', 'max:255'],
+        'color' => ['required', 'string', 'max:7'], // uso hex (#RRGGBB)
+        ], [
+            'nom.regex' => 'El nom només pot contenir lletres i espais.',
         ]);
 
         Prioritat::create($request->only('nom','color'));
-
-        return redirect()->route('prioritats.index');
+        return redirect()->route('prioritats.index')->with('success','Prioritat creada!');
     }
 
     /**
@@ -62,14 +63,16 @@ class PrioritatController extends Controller
     public function update(Request $request, string $id)
     {
         $prioritat = Prioritat::findOrFail($id);
+
         $request->validate([
-            'nom' => 'required|string|max:255',
-            'color' => 'required|string|max:20',
+            'nom' => ['required', 'regex:/^[A-Za-zÀ-ÿ\s]+$/', 'max:255'],
+            'color' => ['required', 'string', 'max:7'],
+        ], [
+            'nom.regex' => 'El nom només pot contenir lletres i espais.',
         ]);
 
         $prioritat->update($request->only('nom','color'));
-
-        return redirect()->route('prioritats.index');
+        return redirect()->route('prioritats.index')->with('success','Prioritat actualitzada!');
     }
 
     /**

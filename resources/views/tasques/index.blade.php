@@ -32,7 +32,9 @@
                 <a href="{{ route('tasques.edit', $tasca) }}" class="btn btn-blue">Editar</a>
                 <form action="{{ route('tasques.destroy', $tasca) }}" method="POST" style="display:inline;">
                     @csrf @method('DELETE')
-                    <button class="btn btn-red">Eliminar</button>
+                    <button class="btn btn-red" onclick="return confirm('Segur que vols eliminar aquesta tasca?')">
+                        Eliminar
+                    </button>
                 </form>
             </td>
         </tr>

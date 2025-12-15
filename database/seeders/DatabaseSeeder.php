@@ -22,10 +22,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'test@example.com',
         ]);
 
-        $this->call([
-            EstatSeeder::class,
-            PrioritatSeeder::class,
-        ]);
+
 
     }
 }

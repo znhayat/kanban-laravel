@@ -24,7 +24,9 @@
                 <a href="{{ route('estats.edit', $estat) }}" class="btn btn-blue">Editar</a>
                 <form action="{{ route('estats.destroy', $estat) }}" method="POST" style="display:inline;">
                     @csrf @method('DELETE')
-                    <button class="btn btn-red">Eliminar</button>
+                    <button class="btn btn-red" onclick="return confirm('Segur que vols eliminar aquest estat?')">
+                        Eliminar
+                    </button>
                 </form>
             </td>
         </tr>

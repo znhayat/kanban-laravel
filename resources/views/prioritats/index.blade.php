@@ -30,7 +30,9 @@
                 <a href="{{ route('prioritats.edit', $prioritat) }}" class="btn btn-blue">Editar</a>
                 <form action="{{ route('prioritats.destroy', $prioritat) }}" method="POST" style="display:inline;">
                     @csrf @method('DELETE')
-                    <button class="btn btn-red">Eliminar</button>
+                    <button class="btn btn-red" onclick="return confirm('Segur que vols eliminar aquesta prioritat?')">
+                        Eliminar
+                    </button>
                 </form>
             </td>
         </tr>

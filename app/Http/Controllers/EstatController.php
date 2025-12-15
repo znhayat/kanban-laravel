@@ -30,12 +30,13 @@ class EstatController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->validate([
-            'nom' => 'required|string|max:255',
+        $request->validate([
+        'nom' => ['required', 'regex:/^[A-Za-zÀ-ÿ\s]+$/', 'max:255'],
+        ], [
+            'nom.regex' => 'El nom només pot contenir lletres i espais.',
         ]);
 
-        Estat::create($data);
-
+        Estat::create($request->only('nom'));
         return redirect()->route('estats.index')->with('success','Estat creat correctament!');
     }
 
@@ -62,17 +63,14 @@ class EstatController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $validatedData = $request->validate([
-            'nom' => 'required|string|max:255',
-            'color' => 'required|string|max:7',
-            'ordre' => 'required|integer',
-            'per_defecte' => 'required|boolean',
-            'descripcio' => 'nullable|string',
+        $request->validate([
+        'nom' => ['required', 'regex:/^[A-Za-zÀ-ÿ\s]+$/', 'max:255'],
+        ], [
+            'nom.regex' => 'El nom només pot contenir lletres i espais.',
         ]);
 
         $estat = Estat::findOrFail($id);
-        $estat->update($validatedData);
-
+        $estat->update($request->only('nom'));
         return redirect()->route('estats.index')->with('success', 'Estat actualitzat correctament.');
     }
 

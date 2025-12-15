@@ -23,10 +23,10 @@ class Tasca extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function prioritat()
-    {
-        return $this->belongsTo(Prioritat::class);
+    public function prioritat() {
+        return $this->belongsTo(Prioritat::class, 'prioritat_id');
     }
+
 
     public function estat()
     {

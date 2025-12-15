@@ -7,32 +7,44 @@
     @csrf
 
     <label>Títol</label>
-    <input type="text" name="titol" required>
+    <input type="text" name="titol" value="{{ old('titol') }}" required>
+    @error('titol') <div class="alert-error">{{ $message }}</div> @enderror
 
     <label>Descripció</label>
-    <textarea name="descripcio"></textarea>
+    <textarea name="descripcio">{{ old('descripcio') }}</textarea>
+    @error('descripcio') <div class="alert-error">{{ $message }}</div> @enderror
 
     <label>Responsable</label>
     <select name="usuari_id" required>
         @foreach($usuaris as $usuari)
-            <option value="{{ $usuari->id }}">{{ $usuari->name }}</option>
+            <option value="{{ $usuari->id }}" @selected(old('usuari_id') == $usuari->id)>
+                {{ $usuari->name }}
+            </option>
         @endforeach
     </select>
+    @error('usuari_id') <div class="alert-error">{{ $message }}</div> @enderror
 
     <label>Prioritat</label>
     <select name="prioritat_id" required>
         @foreach($prioritats as $prioritat)
-            <option value="{{ $prioritat->id }}">{{ $prioritat->nom }} ({{ $prioritat->color }})</option>
+            <option value="{{ $prioritat->id }}" @selected(old('prioritat_id') == $prioritat->id)>
+                {{ $prioritat->nom }} ({{ $prioritat->color }})
+            </option>
         @endforeach
     </select>
+    @error('prioritat_id') <div class="alert-error">{{ $message }}</div> @enderror
 
     <label>Estat</label>
     <select name="estat_id" required>
         @foreach($estats as $estat)
-            <option value="{{ $estat->id }}">{{ $estat->nom }}</option>
+            <option value="{{ $estat->id }}" @selected(old('estat_id') == $estat->id)>
+                {{ $estat->nom }}
+            </option>
         @endforeach
     </select>
+    @error('estat_id') <div class="alert-error">{{ $message }}</div> @enderror
 
     <button class="btn btn-green">Guardar</button>
 </form>
+
 @endsection
