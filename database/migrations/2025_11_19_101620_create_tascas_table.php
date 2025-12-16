@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('usuari_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('prioritat_id')->constrained('prioritats')->onDelete('cascade');
             $table->foreignId('estat_id')->constrained('estats')->onDelete('cascade');
+            $table->date('data_finalitzacio')->nullable(); 
             $table->timestamps();
         });
     }

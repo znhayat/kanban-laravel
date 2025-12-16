@@ -14,6 +14,10 @@
     <textarea name="descripcio">{{ old('descripcio') }}</textarea>
     @error('descripcio') <div class="alert-error">{{ $message }}</div> @enderror
 
+    <label>Data de finalització</label>
+    <input type="date" name="data_finalitzacio" value="{{ old('data_finalitzacio') }}">
+    @error('data_finalitzacio') <div class="alert-error">{{ $message }}</div> @enderror
+
     <label>Responsable</label>
     <select name="usuari_id" required>
         @foreach($usuaris as $usuari)

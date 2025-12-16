@@ -3,49 +3,58 @@
 @section('content')
 <div class="kanban">
     <!--Columna ToDo -->
-    <div class="column" data-estat-id="{{ \App\Models\Estat::where('nom','ToDo')->first()->id }}">
+    @php $estatToDo = \App\Models\Estat::where('nom','ToDo')->first(); @endphp
+    <div class="column" data-estat-id="{{ $estatToDo ? $estatToDo->id : '' }}">
         <h2>ToDo</h2>
         @foreach($todo as $t)
             <div class="card" draggable="true" data-id="{{ $t->id }}">
                 <strong>{{ $t->titol }}</strong>
                 <p>{{ $t->descripcio }}</p>
-                <small>Resp: {{ $t->usuari->name }}</small>
+                <small>Responsable: {{ $t->usuari->name }}</small><br>
                 <small>
                     Prioritat: {{ $t->prioritat->nom }}
                     <span class="color-circle" style="background-color: {{ $t->prioritat->color }}"></span>
-                </small>
+                </small><br>
+                <small>Creada: {{ $t->created_at->format('d/m/Y') }}</small><br>
+                <small>Finalització: {{ $t->data_finalitzacio ? \Carbon\Carbon::parse($t->data_finalitzacio)->format('d/m/Y') : '—' }}</small>
             </div>
         @endforeach
     </div>
 
     <!--Columna Doing -->
-    <div class="column" data-estat-id="{{ \App\Models\Estat::where('nom','Doing')->first()->id }}">
+    @php $estatDoing = \App\Models\Estat::where('nom','Doing')->first(); @endphp
+    <div class="column" data-estat-id="{{ $estatDoing ? $estatDoing->id : '' }}">
         <h2>Doing</h2>
         @foreach($doing as $t)
             <div class="card" draggable="true" data-id="{{ $t->id }}">
                 <strong>{{ $t->titol }}</strong>
                 <p>{{ $t->descripcio }}</p>
-                <small>Resp: {{ $t->usuari->name }}</small>
+                <small>Responsable: {{ $t->usuari->name }}</small><br>
                 <small>
                     Prioritat: {{ $t->prioritat->nom }}
                     <span class="color-circle" style="background-color: {{ $t->prioritat->color }}"></span>
-                </small>
+                </small><br>
+                <small>Creada: {{ $t->created_at->format('d/m/Y') }}</small><br>
+                <small>Finalització: {{ $t->data_finalitzacio ? \Carbon\Carbon::parse($t->data_finalitzacio)->format('d/m/Y') : '—' }}</small>
             </div>
         @endforeach
     </div>
 
     <!--Columna Done -->
-    <div class="column" data-estat-id="{{ \App\Models\Estat::where('nom','Done')->first()->id }}">
+    @php $estatDone = \App\Models\Estat::where('nom','Done')->first(); @endphp
+    <div class="column" data-estat-id="{{ $estatDone ? $estatDone->id : '' }}">
         <h2>Done</h2>
         @foreach($done as $t)
             <div class="card" draggable="true" data-id="{{ $t->id }}">
                 <strong>{{ $t->titol }}</strong>
                 <p>{{ $t->descripcio }}</p>
-                <small>Resp: {{ $t->usuari->name }}</small>
+                <small>Responsable: {{ $t->usuari->name }}</small><br>
                 <small>
                     Prioritat: {{ $t->prioritat->nom }}
                     <span class="color-circle" style="background-color: {{ $t->prioritat->color }}"></span>
-                </small>
+                </small><br>
+                <small>Creada: {{ $t->created_at->format('d/m/Y') }}</small><br>
+                <small>Finalització: {{ $t->data_finalitzacio ? \Carbon\Carbon::parse($t->data_finalitzacio)->format('d/m/Y') : '—' }}</small>
             </div>
         @endforeach
     </div>

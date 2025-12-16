@@ -53,6 +53,8 @@ class TascaController extends Controller
             'usuari_id' => 'required|exists:users,id',
             'prioritat_id' => 'required|exists:prioritats,id',
             'estat_id' => 'required|exists:estats,id',
+            'data_finalitzacio' => 'nullable|date', 
+
         ]);
 
         Tasca::create($request->only('titol','descripcio','usuari_id','prioritat_id','estat_id'));
@@ -90,6 +92,7 @@ class TascaController extends Controller
             'usuari_id' => 'required|exists:users,id',
             'prioritat_id' => 'required|exists:prioritats,id',
             'estat_id' => 'required|exists:estats,id',
+            'data_finalitzacio' => 'nullable|date', 
         ]);
 
         $tasca->update($request->only('titol','descripcio','usuari_id','prioritat_id','estat_id'));

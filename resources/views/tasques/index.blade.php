@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<br></br>
+<br>
 
 @if(session('success'))
     <div class="alert-success">{{ session('success') }}</div>
@@ -18,6 +18,8 @@
         <tr>
             <th>Títol</th>
             <th>Descripció</th>
+            <th>Creada</th>
+            <th>Finalització</th>
             <th>Responsable</th>
             <th>Prioritat</th>
             <th>Estat</th>
@@ -33,6 +35,12 @@
         <tr>
             <td>{{ $tasca->titol }}</td>
             <td>{{ $tasca->descripcio }}</td>
+            <td>{{ $tasca->created_at->format('d/m/Y') }}</td>
+            <td>
+                {{ $tasca->data_finalitzacio 
+                    ? \Carbon\Carbon::parse($tasca->data_finalitzacio)->format('d/m/Y') 
+                    : '—' }}
+            </td>
             <td>{{ $tasca->usuari->name }}</td>
             <td>{{ $tasca->prioritat->nom }} ({{ $tasca->prioritat->color }})</td>
             <td>{{ $tasca->estat->nom }}</td>
