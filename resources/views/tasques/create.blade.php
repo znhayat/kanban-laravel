@@ -5,9 +5,11 @@
 
 <form action="{{ route('tasques.store') }}" method="POST">
     @csrf
+    {{-- Token necessari perquè Laravel accepti el formulari --}}
 
     <label>Títol</label>
     <input type="text" name="titol" value="{{ old('titol') }}" required>
+    {{-- Missatge d’error si la validació del camp "titol" falla --}}
     @error('titol') <div class="alert-error">{{ $message }}</div> @enderror
 
     <label>Descripció</label>

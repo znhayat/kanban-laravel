@@ -1,76 +1,64 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="ca">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>{{ config('app.name', 'KanBan') }}</title>
-
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
-
-    <!-- Styles / Scripts -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Benvingut al Kanban</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background: #ffffff;
+            color: #1b1b18;
+            font-family: 'Arial', sans-serif;
+        }
+        .btn-verd {
+            background-color: #c7e29d;
+            color: #1b1b18;
+        }
+        .btn-roig {
+            background-color: #7e1c1c;
+            color: #ffffff;
+        }
+        .btn-verd:hover, .btn-roig:hover {
+            opacity: 0.8;
+        }
+    </style>
 </head>
-<body class="bg-white text-gray-800 min-h-screen flex flex-col">
+<body class="flex flex-col items-center justify-center min-h-screen p-6">
 
-    <!-- Header -->
-    <header class="w-full px-6 py-4 flex justify-end items-center shadow-sm">
-        @if (Route::has('login'))
-            <nav class="flex items-center gap-4">
-                @auth
-                    <a href="{{ url('/dashboard') }}"
-                       class="px-4 py-2 text-sm font-medium text-gray-700 hover:text-green-600 transition">
-                        Dashboard
-                    </a>
-                @else
-                    <a href="{{ route('login') }}"
-                       class="px-4 py-2 text-sm font-medium text-gray-700 hover:text-green-600 transition">
-                        Inicia sessió
-                    </a>
-                    @if (Route::has('register'))
-                        <a href="{{ route('register') }}"
-                           class="px-4 py-2 text-sm font-medium text-gray-700 hover:text-green-600 transition">
-                            Registrat
-                        </a>
-                    @endif
-                @endauth
-            </nav>
-        @endif
+    <!-- Header amb botons -->
+    <header class="w-full max-w-4xl flex justify-end gap-4 mb-6">
+        <a href="/login" class="px-5 py-2 rounded btn-verd transition">Inicia Sessió</a>
+        <a href="/register" class="px-5 py-2 rounded btn-roig transition">Registra't</a>
     </header>
 
-    <!-- Main content -->
-    <main class="flex flex-1 items-center justify-center px-6 py-12">
-        <div class="text-center">
-            <!-- Imagen KanBan con estilo -->
-            <div class="inline-block bg-gray-50 p-6 rounded-lg shadow-lg transform hover:scale-105 transition duration-300">
-                <img src="{{ asset('images/KanBan.png') }}" alt="Logo KanBan" class="h-48 mx-auto">
-            </div>
-
-            <!-- Título -->
-            <h1 class="mt-8 text-4xl font-extrabold text-gray-800">
-                Benvingut a <span class="text-green-600">KanBan</span>
-            </h1>
-
-            <!-- Subtítulo -->
-            <p class="mt-4 text-lg text-gray-600">
-                Organitza les teves tasques de manera visual i senzilla.
+    <!-- Contingut principal -->
+    <main class="flex flex-col-reverse lg:flex-row w-full max-w-4xl gap-8 items-center">
+        <!-- Textual -->
+        <div class="flex-1 p-8 shadow rounded-lg">
+            <h1 class="text-3xl font-bold mb-4">Benvingut al Simulador Kanban</h1>
+            <p class="mb-4">
+                Aquesta eina està dissenyada per ajudar-te a gestionar tasques amb el mètode Kanban. 
+                Pots organitzar projectes, assignar tasques i fer un seguiment fàcil i visual.
             </p>
+            <p class="mb-6">
+                Per començar, consulta el manual d'usuari per entendre com funciona tot:
+            </p>
+            <a href="https://institutcampalans-team-lf3flsyc.atlassian.net/wiki/spaces/DDS/pages/458941/Manual+d+Usuari+Simulador+Kanban+DAW2" 
+               target="_blank" 
+               class="px-4 py-2 rounded btn-verd font-medium transition">
+               Manual d'Usuari
+            </a>
+        </div>
 
-            <!-- Botón al dashboard -->
-            <div class="mt-8">
-                <a href="{{ route('dashboard') }}"
-                   class="px-6 py-3 bg-green-600 text-white rounded-lg shadow hover:bg-green-700 transition">
-                   Ir al Dashboard
-                </a>
-            </div>
+        <!-- Imatge -->
+        <div class="flex-1 flex items-center justify-center">
+            <img src="{{ asset('images/KanBan.png') }}" class="rounded-full w-40 h-40 object-cover">
+        </div>
+
+
         </div>
     </main>
-
-    <!-- Footer -->
-    <footer class="text-center py-6 text-sm text-gray-400 border-t">
-        © {{ date('Y') }} KanBan Project · Desenvolupat per Hayat
-    </footer>
+    
 </body>
 </html>

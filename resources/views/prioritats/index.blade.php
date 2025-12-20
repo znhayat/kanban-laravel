@@ -30,7 +30,10 @@
         <tr>
             <td>{{ $prioritat->nom }}</td>
             <td>
-                <!-- Cercle de color (sense hexadecimal) -->
+                {{-- Aquesta línia pot donar error si $prioritat->color és null o no existeix,
+                     perquè llavors no es pot aplicar un color vàlid al CSS.
+                     També es posa l’estil aquí perquè el color ve de la base de dades
+                     i s’ha d’aplicar de manera dinàmica a cada prioritat. --}}
                 <span class="color-circle" style="background-color: {{ $prioritat->color }}"></span>
             </td>
             @auth

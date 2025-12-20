@@ -37,9 +37,8 @@
             <td>{{ $tasca->descripcio }}</td>
             <td>{{ $tasca->created_at->format('d/m/Y') }}</td>
             <td>
-                {{ $tasca->data_finalitzacio 
-                    ? \Carbon\Carbon::parse($tasca->data_finalitzacio)->format('d/m/Y') 
-                    : '—' }}
+                {{ $tasca->data_finalitzacio ? $tasca->data_finalitzacio->format('d/m/Y') : '—' }}
+
             </td>
             <td>{{ $tasca->usuari->name }}</td>
             <td>{{ $tasca->prioritat->nom }} ({{ $tasca->prioritat->color }})</td>
@@ -49,7 +48,8 @@
                     <td>
                         <a href="{{ route('tasques.edit', $tasca) }}" class="btn btn-blue">Editar</a>
                         <form action="{{ route('tasques.destroy', $tasca) }}" method="POST" style="display:inline;">
-                            @csrf @method('DELETE')
+                            @csrf
+                            @method('DELETE')
                             <button class="btn btn-red" onclick="return confirm('Segur que vols eliminar aquesta tasca?')">
                                 Eliminar
                             </button>

@@ -1,5 +1,5 @@
 /* 
- * 1. Primero, defino mis colores para usarlos después
+ * Primero, defino mis colores para usarlos después
  * Los guardo en variables para no tener que escribirlos cada vez
  */
 :root {
@@ -11,7 +11,7 @@
 }
 
 /* 
- * 2. Estilos para toda la página
+ * Estilos para toda la página
  */
 body {
     font-family: Arial, sans-serif;    
@@ -20,7 +20,7 @@ body {
 }
 
 /* 
- * 3. Estilos para los títulos
+ * Estilos para los títulos
  */
 h1, .title {
     color: var(--negro);               
@@ -28,7 +28,7 @@ h1, .title {
 }
 
 /* 
- * 4. Estilos para los botones
+ * Estilos para los botones
  */
 .btn {
     /* Cómo se muestra el botón */
@@ -68,7 +68,7 @@ h1, .title {
 }
 
 /* 
- * 5. Estilos para formularios
+ * Estilos para formularios
  * Todos los <form> tendrán este estilo
  */
 form {
@@ -97,7 +97,7 @@ textarea {
 }
 
 /* 
- * 6. Estilos para tablas
+ * Estilos para tablas
  * Todas las <table> tendrán este estilo
  */
 table {
@@ -134,7 +134,7 @@ td {
 }
 
 /* 
- * 8. Estilos para mensajes de éxito
+ * Estilos para mensajes de éxito
  * Cuando algo se guarda bien
  */
 .alert-success {
@@ -147,8 +147,7 @@ td {
 }
 
 /* 
- * 9. Estilos para móviles (responsive)
- * Esto solo se aplica cuando la pantalla tiene menos de 768px de ancho
+ * Estilos per movils (responsive)
  */
 @media (max-width: 768px) {
     /* En móviles, el Kanban se pone en columna */
@@ -205,3 +204,4 @@ td {
     margin-left: 6px;
     vertical-align: middle;
 }
+

@@ -19,7 +19,7 @@
         value="{{ old('data_finalitzacio', $tasca->data_finalitzacio ? $tasca->data_finalitzacio->format('Y-m-d') : '') }}">
     @error('data_finalitzacio') <div class="alert-error">{{ $message }}</div> @enderror
 
-
+    {{-- Selecció del responsable --}}
     <label>Responsable</label>
     <select name="usuari_id" required>
         @foreach($usuaris as $usuari)
@@ -31,6 +31,7 @@
     </select>
     @error('usuari_id') <div class="alert-error">{{ $message }}</div> @enderror
 
+    {{-- Selecció de la prioritat --}}
     <label>Prioritat</label>
     <select name="prioritat_id" required>
         @foreach($prioritats as $prioritat)
@@ -42,6 +43,7 @@
     </select>
     @error('prioritat_id') <div class="alert-error">{{ $message }}</div> @enderror
 
+    {{-- Selecció de l’estat --}}
     <label>Estat</label>
     <select name="estat_id" required>
         @foreach($estats as $estat)
@@ -53,6 +55,7 @@
     </select>
     @error('estat_id') <div class="alert-error">{{ $message }}</div> @enderror
 
+    {{-- Botó per actualitzar --}}
     <button class="btn btn-blue">Actualitzar</button>
 </form>
 

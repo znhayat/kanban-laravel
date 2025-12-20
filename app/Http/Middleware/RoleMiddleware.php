@@ -16,21 +16,27 @@ class RoleMiddleware
      */
     public function handle(Request $request, Closure $next, ...$roles): Response
     {
-        // 1. Comprovar si l'usuari està autenticat
+        // Comprovar si l'usuari està autenticat
+        // Aquí bàsicament miro si hi ha algú loguejat. Si no hi ha ningú,
+        // doncs el mando a la pàgina de login perquè òbviament no pot entrar.
         if (!Auth::check()) {
             return redirect()->route('login');
         }
 
-        // 2. Obtenir l'usuari actual
+        // Obtenir l'usuari actual
+        // Agafo l’usuari que està loguejat ara mateix perquè necessito mirar el seu rol.
         $user = Auth::user();
 
-        // 3. Comprovar si l'usuari té algun dels rols permesos
+        // Comprovar si l'usuari té algun dels rols permesos
+        // Aquí miro si el rol de l’usuari està dins dels rols que he passat al middleware.
+        // Si no coincideix amb cap, doncs no pot entrar i li foto un 403.
         if (!in_array($user->role, $roles)) {
             // Si no té permis, retornar error 403 (Prohibit)
             abort(403, 'Accés denegat. No tens els permisos necessaris.');
         }
 
-        // 4. Si tot és correcte, continuar amb la petició
+        // Si tot és correcte, continuar amb la petició
+        // Si ha passat totes les comprovacions, doncs deixo que segueixi endavant.
         return $next($request);
     }
 }

@@ -12,15 +12,27 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('KanBan') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('tasques.index')" :active="request()->routeIs('tasques.*')">
-                        {{ __('Tasques') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('prioritats.index')" :active="request()->routeIs('prioritats.*')">
-                        {{ __('Prioritats') }}
-                    </x-nav-link>
+
+                    <!-- SOLO ADMIN -->
+                    @if(auth()->user()->role === 'admin')
+                        <x-nav-link :href="route('tasques.index')" :active="request()->routeIs('tasques.*')">
+                            {{ __('Tasques') }}
+                        </x-nav-link>
+
+                        <x-nav-link :href="route('prioritats.index')" :active="request()->routeIs('prioritats.*')">
+                            {{ __('Prioritats') }}
+                        </x-nav-link>
+
+                        <x-nav-link :href="route('estats.index')" :active="request()->routeIs('estats.*')">
+                            {{ __('Estats') }}
+                        </x-nav-link>
+                    @endif
+                    <!-- FIN SOLO ADMIN -->
+
                 </div>
             </div>
 
@@ -74,6 +86,22 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+
+            <!-- SOLO ADMIN EN MÓVIL -->
+            @if(auth()->user()->role === 'admin')
+                <x-responsive-nav-link :href="route('tasques.index')" :active="request()->routeIs('tasques.*')">
+                    {{ __('Tasques') }}
+                </x-responsive-nav-link>
+
+                <x-responsive-nav-link :href="route('prioritats.index')" :active="request()->routeIs('prioritats.*')">
+                    {{ __('Prioritats') }}
+                </x-responsive-nav-link>
+
+                <x-responsive-nav-link :href="route('estats.index')" :active="request()->routeIs('estats.*')">
+                    {{ __('Estats') }}
+                </x-responsive-nav-link>
+            @endif
+            <!-- FIN SOLO ADMIN -->
         </div>
 
         <!-- Responsive Settings Options -->
@@ -88,13 +116,12 @@
                     {{ __('Profile') }}
                 </x-responsive-nav-link>
 
-                <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
 
-                <x-responsive-nav-link :href="route('logout')"
-                            onclick="event.preventDefault();
-                                        this.closest('form').submit();">
+                    <x-responsive-nav-link :href="route('logout')"
+                                onclick="event.preventDefault();
+                                            this.closest('form').submit();">
                         {{ __('Log Out') }}
                     </x-responsive-nav-link>
                 </form>
