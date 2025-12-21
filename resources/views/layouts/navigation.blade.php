@@ -30,7 +30,14 @@
                         <x-nav-link :href="route('estats.index')" :active="request()->routeIs('estats.*')">
                             {{ __('Estats') }}
                         </x-nav-link>
+                        <x-nav-link :href="route('usuaris.index')" :active="request()->routeIs('usuaris.*')">
+    {{ __('Responsables') }}
+</x-nav-link>
+
+
+                        
                     @endif
+
                     <!-- FIN SOLO ADMIN -->
 
                 </div>

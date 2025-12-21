@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<h1 class="title">Editar prioritat</h1>
 
+<div class="form-center">
 <form action="{{ route('prioritats.update', $prioritat) }}" method="POST">
     @csrf @method('PUT')
 
@@ -16,5 +16,5 @@
 
     <button class="btn btn-blue">Actualitzar</button>
 </form>
-
+</div>
 @endsection

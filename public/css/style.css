@@ -1,7 +1,6 @@
-/* 
- * Primero, defino mis colores para usarlos después
- * Los guardo en variables para no tener que escribirlos cada vez
- */
+/* =====================================================
+   VARIABLES DE COLORS
+   ===================================================== */
 :root {
     --verde: #5b6946;
     --verde1: #acca7e;
@@ -10,168 +9,145 @@
     --rojo: #7e1c1c;  
 }
 
-/* 
- * Estilos para toda la página
- */
+/* =====================================================
+   ESTILS GENERALS DE LA PÀGINA
+   ===================================================== */
 body {
-    font-family: Arial, sans-serif;    
-    color: var(--negro);               
-    padding: 20px;                     
+    font-family: Arial, sans-serif;
+    color: var(--negro);
+    padding: 20px;
 }
 
-/* 
- * Estilos para los títulos
- */
 h1, .title {
-    color: var(--negro);               
-    font-size: 24px;                   
+    color: var(--negro);
+    font-size: 24px;
 }
 
-/* 
- * Estilos para los botones
- */
+/* =====================================================
+   BOTONS
+   ===================================================== */
 .btn {
-    /* Cómo se muestra el botón */
-    padding: 10px 20px;                /* 10px arriba/abajo, 20px izquierda/derecha */
-    margin: 5px;                       /* 5px de espacio alrededor */
-    
-    /* Cómo es el texto */
-    font-weight: bold;                 /* Texto en negrita */
-    text-align: center;                /* Texto centrado dentro del botón */
-    
-    /* Cómo es la forma del botón */
-    border-radius: 5px;                /* Esquinas redondeadas 5px */
+    padding: 10px 20px;
+    margin: 5px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+    text-decoration: none;
+    display: inline-block; /* Assegura consistència amb a i button */
 }
 
-/* 
- * Botón verde - para acciones positivas (Añadir, Guardar)
- */
-.btn-green {
-    background-color: var(--verde);    /* Fondo verde */
-    color: var(--negro);               /* Texto negro */
-}
+/* Colors específics per tipus de botó */
+.btn-green { background-color: var(--verde); color: var(--negro); }
+.btn-blue { background-color: var(--verde1); color: var(--negro); }
+.btn-red { background-color: var(--rojo); color: var(--blanco); }
 
-/* 
- * Botón(Editar, Actualizar)
- */
-.btn-blue {
-    background-color: var(--verde1);     
-    color: var(--negro);               /* Texto negro */
-}
-
-/* 
- * Botón(Eliminar)
- */
-.btn-red {
-    background-color: var(--rojo);    /* Fondo negro */
-    color: var(--blanco);              /* Texto blanco */
-}
-
-/* 
- * Estilos para formularios
- * Todos los <form> tendrán este estilo
- */
+/* =====================================================
+   FORMULARIS
+   ===================================================== */
 form {
-    padding: 20px;                     
-    border-radius: 10px;               /* Esquinas redondeadas 10px */
-    margin-bottom: 20px;               /* 20px de espacio debajo */
-    max-width: 500px;                  /* Ancho máximo de 500px */
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    max-width: 500px;
 }
 
-/* 
- * Labels dentro de formularios
- * Cada <label> se muestra como bloque (uno debajo de otro)
- */
+/* Formulari centrat */
+.form-center { 
+    display: flex; 
+    justify-content: center; 
+}
+
+.form-center form {
+    background: #f9f9f9;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    max-width: 400px;
+    width: 100%;
+    border: 2px solid #e0e0e0;
+}
+
+/* Labels dins de formularis */
 label {
-    display: block;                    /* Ocupa toda la línea */
-    margin-top: 15px;                  /* 15px de espacio arriba */
-    margin-bottom: 5px;                /* 5px de espacio abajo */
-    font-weight: bold;                 /* Texto en negrita */
+    display: block;
+    font-weight: 600;
+    margin-top: 15px;
+    margin-bottom: 8px;
 }
 
-/* 
- * Los textareas un poco más altos
- */
+/* Inputs de text */
+input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    transition: border-color 0.3s;
+}
+
+/* Textarea */
 textarea {
-    height: 100px;                     /* Altura fija de 100px */
+    height: 100px;
 }
 
-/* 
- * Estilos para tablas
- * Todas las <table> tendrán este estilo
- */
-table {
-    width: 100%;                       /* Ocupan todo el ancho */
-    border-collapse: collapse;         /* Los bordes de las celdas se juntan */
-    margin-top: 20px;                  /* 20px de espacio arriba */
-}
-/* 
- * Cabeceras de tabla (<th>)
- */
-th {
-    background-color: var(--verde1);  
-    color: var(--negro);              
-    padding: 12px;                     /* 12px de espacio interno */
-    text-align: left;                  /* Texto alineado a la izquierda */
-}
-
-/* 
- * Celdas normales de tabla (<td>)
- */
-td {
-    padding: 10px;                     
-}
-
-/* 
- * Títulos de las columnas (ToDo, Doing, Done)
- */
-.column h2 {
-    background-color: var(--verde1);    /* Fondo verde */
-    color: var(--negro);               /* Texto negro */
-    padding: 10px;                     /* 10px de espacio interno */
-    border-radius: 5px;                /* Esquinas redondeadas 5px */
-    text-align: center;                /* Texto centrado */
-}
-
-/* 
- * Estilos para mensajes de éxito
- * Cuando algo se guarda bien
- */
+/* =====================================================
+   ALERTES
+   ===================================================== */
 .alert-success {
-    background-color: var(--verde);    /* Fondo verde */
-    color: var(--negro);               /* Texto negro */
-    padding: 10px;                     /* 10px de espacio interno */
-    border-radius: 5px;                /* Esquinas redondeadas 5px */
-    margin-bottom: 20px;               /* 20px de espacio debajo */
-    border-left: 5px solid var(--negro); /* Borde izquierdo negro de 5px */
+    background-color: var(--verde);
+    color: var(--negro);
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    border-left: 5px solid var(--negro);
 }
 
-/* 
- * Estilos per movils (responsive)
- */
-@media (max-width: 768px) {
-    /* En móviles, el Kanban se pone en columna */
-    .kanban {
-        flex-direction: column;        /* Una columna debajo de otra */
-    }
-    
-    /* En móviles, los botones ocupan todo el ancho */
-    .btn {
-        display: block;                /* Cada botón en su propia línea */
-        width: 100%;                   /* Ocupan todo el ancho */
-        margin: 10px 0;                /* 10px arriba y abajo */
-    }
-}
 .alert-error {
-    background-color: #f8d7da;  /* Rojo suave */
-    color: #721c24;             /* Texto rojo oscuro */
+    background-color: #f8d7da;
+    color: #721c24;
     padding: 10px;
     border-radius: 5px;
     margin-top: 5px;
     border-left: 5px solid #721c24;
 }
 
-/* Estils generals del Kanban */
+/* =====================================================
+   TAULES MODERNES
+   ===================================================== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    background: var(--blanco);
+}
+
+thead {
+    background-color: var(--verde1);
+}
+
+thead th {
+    padding: 12px;
+    text-align: left;
+    font-weight: 600;
+    color: var(--negro);
+}
+
+tbody td {
+    padding: 12px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+tbody tr:hover {
+    background-color: #f1f7f9;
+}
+
+/* =====================================================
+   KANBAN I COLUMNES
+   ===================================================== */
 .kanban {
     display: flex;
     gap: 20px;
@@ -185,6 +161,14 @@ td {
     border-radius: 6px;
 }
 
+.column h2 {
+    background-color: var(--verde1);
+    color: var(--negro);
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+}
+
 .card {
     background: #fff;
     border: 1px solid #ccc;
@@ -194,7 +178,7 @@ td {
     cursor: grab;
 }
 
-/* Cercle de color per a les prioritats */
+/* Cercle de color per prioritats */
 .color-circle {
     display: inline-block;
     width: 15px;
@@ -205,3 +189,42 @@ td {
     vertical-align: middle;
 }
 
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+@media (max-width: 768px) {
+    .kanban {
+        flex-direction: column;
+    }
+    
+    .btn {
+        display: block;
+        width: 100%;
+        margin: 10px 0;
+    }
+}
+
+/* Boto afegir task */
+.btn-add-task {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+
+    width: 65px;
+    height: 65px;
+
+    background-color: #96ad73ff;
+    color: white;
+    font-size: 32px;
+    font-weight: bold;
+
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.btn-add-task:hover {
+    background-color: #7f965fff; 
+}

@@ -7,75 +7,60 @@ use Illuminate\Http\Request;
 
 class UsuariController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $usuaris = User::all();
         return view('usuaris.index', compact('usuaris'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return view('usuaris.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $request->validate([
-            'nom' => 'required|string|max:255',
+            'nom' => 'required|regex:/^[A-Za-zÀ-ÿ\s]+$/u|max:255',
             'email' => 'required|email|unique:users',
+            'password' => 'required|string|min:6',
+        ], [
+            'nom.regex' => 'El nom només pot contenir lletres i espais.',
+            'password.min' => 'La contrasenya ha de tenir almenys 6 caràcters.',
         ]);
 
         User::create([
-            
-            'nom' => $request->nom,   
+            'name' => $request->nom,   // CORREGIT
             'email' => $request->email,
-            'password' => bcrypt('123456'),
+            'password' => bcrypt($request->password),
         ]);
 
-        return redirect()->route('usuaris.index');
+        return redirect()->route('usuaris.index')
+                         ->with('success', 'Responsable creat correctament.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
         $usuari = User::findOrFail($id);
         return view('usuaris.edit', compact('usuari'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
         $usuari = User::findOrFail($id);
 
         $request->validate([
-            'nom' => 'required|string|max:255',
+            'nom' => 'required|regex:/^[A-Za-zÀ-ÿ\s]+$/u|max:255',
             'email' => 'required|email|unique:users,email,' . $usuari->id,
             'password' => 'nullable|string|min:6',
+        ], [
+            'nom.regex' => 'El nom només pot contenir lletres i espais.',
+            'password.min' => 'La contrasenya ha de tenir almenys 6 caràcters.',
         ]);
 
+
         $data = [
-            'nom' => $request->nom,   
+            'name' => $request->nom,   // CORREGIT
             'email' => $request->email,
         ];
 
@@ -85,16 +70,16 @@ class UsuariController extends Controller
 
         $usuari->update($data);
 
-        return redirect()->route('usuaris.index');
+        return redirect()->route('usuaris.index')
+                         ->with('success', 'Responsable actualitzat correctament.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
         $usuari = User::findOrFail($id);
         $usuari->delete();
-        return redirect()->route('usuaris.index');
+
+        return redirect()->route('usuaris.index')
+                         ->with('success', 'Responsable eliminat correctament.');
     }
 }

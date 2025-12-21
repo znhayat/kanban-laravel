@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<h1 class="title">Editar tasca</h1>
 
+<div class="form-center">
 <form action="{{ route('tasques.update', $tasca) }}" method="POST">
     @csrf @method('PUT')
 
@@ -58,5 +58,5 @@
     {{-- Botó per actualitzar --}}
     <button class="btn btn-blue">Actualitzar</button>
 </form>
-
+</div>
 @endsection

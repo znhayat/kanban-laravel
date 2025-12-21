@@ -1,8 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<h1 class="title">Afegir prioritat</h1>
-
+<div class="form-center">
 <form action="{{ route('prioritats.store') }}" method="POST">
     @csrf
     {{-- Token necessari perquè Laravel accepti el formulari --}}
@@ -19,5 +18,5 @@
 
     <button class="btn btn-green">Guardar</button>
 </form>
-
+</div>
 @endsection

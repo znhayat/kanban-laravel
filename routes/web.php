@@ -11,6 +11,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::resource('usuaris', UsuariController::class);
+
 // Dashboard (autenticats i verificats)
 Route::get('/dashboard', [TascaController::class, 'dashboard'])
     ->middleware(['auth', 'verified'])

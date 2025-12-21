@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<h1 class="title">Llista de responsables</h1>
 
 <a href="{{ route('usuaris.create') }}" class="btn btn-green">Afegir responsable</a>
 
@@ -20,10 +19,11 @@
     <tbody>
         @foreach($usuaris as $usuari)
         <tr>
-            <td>{{ $usuari->nom }}</td>
+            <td>{{ $usuari->name }}</td>
             <td>{{ $usuari->email }}</td>
             <td>
                 <a href="{{ route('usuaris.edit', $usuari) }}" class="btn btn-blue">Editar</a>
+
                 <form action="{{ route('usuaris.destroy', $usuari) }}" method="POST" style="display:inline;">
                     @csrf
                     @method('DELETE')

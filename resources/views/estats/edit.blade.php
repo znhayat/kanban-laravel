@@ -1,8 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<h1 class="title">Editar estat</h1>
-
+<div class="form-center">
 <form action="{{ route('estats.update', $estat) }}" method="POST">
     @csrf @method('PUT')
     {{-- S’indica que la petició és de tipus PUT per actualitzar el registre --}}
@@ -16,4 +15,5 @@
 
     <button class="btn btn-blue">Actualitzar</button>
 </form>
+</div>
 @endsection

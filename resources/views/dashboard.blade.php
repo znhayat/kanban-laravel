@@ -2,36 +2,84 @@
 
 @section('content')
 
+{{-- 
+    Creo el contenidor principal del kanban.
+    Uso grid de Tailwind pk així puc fer 3 columnes a desktop
+    i 1 sola columna a mòbil sense complicar-me.
+--}}
 <div class="kanban grid grid-cols-1 md:grid-cols-3 gap-6 px-4 py-6">
 
     <!-- ================= COLUMNA TODO ================= -->
+
+    {{-- 
+        Agafo l’estat "ToDo" directament de la BD.
+        Ho faig aho pk després necessito el seu id
+        per poder canviar l’estat quan arrossego una tasca.
+    --}}
     @php $estatToDo = \App\Models\Estat::where('nom','ToDo')->first(); @endphp
+
+    {{-- 
+        Aquesta és la columna ToDo.
+        Li poso data-estat-id pk el JS sap quin estat li toca
+        quan deixo anar una targeta.
+    --}}
     <div class="column bg-gray-50 rounded-lg p-4 shadow"
          data-estat-id="{{ $estatToDo ? $estatToDo->id : '' }}">
 
+        {{-- Títol de la columna --}}
         <h2 class="text-xl font-bold text-blue-600 mb-4">ToDo</h2>
 
+        {{-- Recorro totes les tasques ToDo --}}
         @foreach($todo as $t)
+
+            {{-- 
+                Cada tasca és una card.
+                draggable="true" pk la pugui arrossegar.
+                data-id pk després el JS sàpiga quina tasca és.
+            --}}
             <div class="card relative bg-white rounded-lg shadow p-4 mb-4 flex flex-col justify-between"
                  draggable="true"
                  data-id="{{ $t->id }}">
 
                 <!-- Cercle de prioritat a baix a la dreta -->
+
+                {{-- 
+                    Aquest span és el cercle de prioritat.
+                    Uso style inline pk el color ve de la BD
+                    i Tailwind NO pot gestionar colors dinàmics.
+                    
+                    No dona error pk Blade ja resol {{ }} abans
+                    d’enviar l’HTML al navegador.
+                --}}
                 <span class="absolute w-4 h-4 rounded-full"
                       style="background-color: {{ $t->prioritat->color }}; bottom: 8px; right: 8px;"
                       title="Prioritat: {{ $t->prioritat->nom }}"></span>
 
-                <!-- Contingut principal -->
+                <!-- Contingut principal de la tasca -->
                 <div>
-                    <h3 class="font-semibold text-gray-800 mb-1">{{ $t->titol }}</h3>
-                    <p class="text-sm text-gray-600">{{ $t->descripcio }}</p>
+                    <h3 class="font-semibold text-gray-800 mb-1">
+                        {{ $t->titol }}
+                    </h3>
+
+                    <p class="text-sm text-gray-600">
+                        {{ $t->descripcio }}
+                    </p>
                 </div>
 
-                <!-- Footer amb info addicional -->
+                <!-- Footer amb info extra -->
                 <div class="mt-4 pt-2 border-t border-gray-200 text-xs text-gray-700 space-y-1">
-                    <p><span class="font-medium">Responsable:</span> {{ $t->usuari->name }}</p>
-                    <p><span class="font-medium">Creada:</span> {{ $t->created_at->format('d/m/Y') }}</p>
-                    <p><span class="font-medium">Finalització:</span>
+                    <p>
+                        <span class="font-medium">Responsable:</span>
+                        {{ $t->usuari->name }}
+                    </p>
+
+                    <p>
+                        <span class="font-medium">Creada:</span>
+                        {{ $t->created_at->format('d/m/Y') }}
+                    </p>
+
+                    <p>
+                        <span class="font-medium">Finalització:</span>
                         {{ $t->data_finalitzacio ? $t->data_finalitzacio->format('d/m/Y') : '—' }}
                     </p>
                 </div>
@@ -40,7 +88,10 @@
     </div>
 
     <!-- ================= COLUMNA DOING ================= -->
+
+    {{-- Mateixa lògica q ToDo però amb l’estat Doing --}}
     @php $estatDoing = \App\Models\Estat::where('nom','Doing')->first(); @endphp
+
     <div class="column bg-gray-50 rounded-lg p-4 shadow"
          data-estat-id="{{ $estatDoing ? $estatDoing->id : '' }}">
 
@@ -51,6 +102,7 @@
                  draggable="true"
                  data-id="{{ $t->id }}">
 
+                {{-- Cercle de prioritat amb color dinàmic --}}
                 <span class="absolute w-4 h-4 rounded-full"
                       style="background-color: {{ $t->prioritat->color }}; bottom: 8px; right: 8px;"
                       title="Prioritat: {{ $t->prioritat->nom }}"></span>
@@ -72,7 +124,10 @@
     </div>
 
     <!-- ================= COLUMNA DONE ================= -->
+
+    {{-- Última columna amb l’estat Done --}}
     @php $estatDone = \App\Models\Estat::where('nom','Done')->first(); @endphp
+
     <div class="column bg-gray-50 rounded-lg p-4 shadow"
          data-estat-id="{{ $estatDone ? $estatDone->id : '' }}">
 
@@ -107,36 +162,36 @@
 <script>
 document.addEventListener('DOMContentLoaded', () => {
 
-    // Guarda la targeta que s'està arrossegant
+    // Desa la card q estic arrossegant
     let draggedCard = null;
 
-    // Assigna l'event de dragstart a cada targeta
+    // Quan començo a arrossegar, guardo la card
     document.querySelectorAll('.card').forEach(card => {
         card.addEventListener('dragstart', () => { 
             draggedCard = card; 
         });
     });
 
-    // Configura les columnes per permetre el drop
+    // Preparo les columnes per acceptar el drop
     document.querySelectorAll('.column').forEach(column => {
 
-        // Permet que la targeta es pugui deixar anar
+        // Necessari pk el drop funcioni
         column.addEventListener('dragover', e => e.preventDefault());
 
-        // Quan es deixa anar la targeta
+        // Quan deixo anar la card
         column.addEventListener('drop', e => {
             e.preventDefault();
 
             if (draggedCard) {
 
-                // Mou visualment la targeta a la nova columna
+                // Mou la card visualment
                 column.appendChild(draggedCard);
 
-                // Obté l'ID de la tasca i el nou estat
+                // Agafo la tasca i el nou estat
                 let taskId = draggedCard.dataset.id;
                 let estatId = column.dataset.estatId;
 
-                // Envia la petició AJAX per actualitzar l'estat a la BD
+                // Envio la petició per actualitzar l’estat a la BD
                 fetch(`/tasques/${taskId}/update-estat`, {
                     method: 'POST',
                     headers: {
@@ -150,5 +205,16 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 </script>
+
+<!-- 
+    Botó flotant per afegir tasques.
+    El faig rodó pk sigui més modern i visible.
+    El poso fixed pk sempre estigui a baix a la dreta.
+-->
+<a href="{{ route('tasques.create') }}"
+   class="btn-add-task"
+   title="Afegir tasca">
+    +
+</a>
 
 @endsection
